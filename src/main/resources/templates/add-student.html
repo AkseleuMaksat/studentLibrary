@@ -1,0 +1,49 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html">
+<div layout:fragment="akseleuFragment">
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+        <div class="card shadow-lg p-4" style="width: 400px; border-radius: 15px;">
+            <h4 class="text-center mb-4 text-info">Add Student</h4>
+
+            <form th:action="@{add-student}" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="name"
+                           name="name"
+                           placeholder="Enter your name"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="surname" class="form-label">Surname</label>
+                    <input type="text"
+                           class="form-control"
+                           id="surname"
+                           name="surname"
+                           placeholder="Enter your surname"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exam" class="form-label">Exam Score</label>
+                    <input type="number"
+                           class="form-control"
+                           id="exam"
+                           name="exam"
+                           placeholder="Enter your exam score"
+                           min="0"
+                           max="100"
+                           required>
+                </div>
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-success btn">SAVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
