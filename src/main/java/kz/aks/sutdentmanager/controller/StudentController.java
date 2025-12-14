@@ -39,11 +39,12 @@ public class StudentController {
                              @RequestParam("surname") String surname,
                              @RequestParam("exam") int exam) {
 
-        Student student = new Student();
-        student.setName(name);
-        student.setSurname(surname);
-        student.setExam(exam);
-        student.setMark(DB.getMarkOfStudent(exam));
+        Student student = Student.builder()
+                .name(name)
+                .surname(surname)
+                .exam(exam)
+                .mark(DB.getMarkOfStudent(exam))
+                .build();
 
         DB.addStudent(student);
 
