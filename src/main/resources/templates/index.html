@@ -1,6 +1,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/main.html">
+      layout:decorate="~{layout/main.html}">
 <div layout:fragment="akseleuFragment">
     <table class="table mt-2">
         <thead>
@@ -10,15 +10,17 @@
             <th scope="col">Surname</th>
             <th scope="col">Exam</th>
             <th scope="col">Mark</th>
+            <th scope="col">DETAILS</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="sh:${students}">
-            <td th:text="${sh.id}"></td>
-            <td th:text="${sh.name}"></td>
-            <td th:text="${sh.surname}"></td>
-            <td th:text="${sh.exam}"></td>
-            <td th:text="${sh.mark}"></td>
+            <td th:text="${sh.getId()}"></td>
+            <td th:text="${sh.getName()}"></td>
+            <td th:text="${sh.getSurname()}"></td>
+            <td th:text="${sh.getExam()}"></td>
+            <td th:text="${sh.getMark()}"></td>
+            <td><a class="btn btn-info" th:href="@{'/details/' + ${sh.getId()}}">DETAILS</a></td>
         </tr>
         </tbody>
     </table>

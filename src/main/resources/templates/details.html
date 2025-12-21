@@ -1,0 +1,114 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main.html}">
+<div layout:fragment="akseleuFragment">
+    <div class="container mt-4" th:if="${student != null}">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">Task Details</h4>
+            <a class="btn btn-outline-secondary" th:href="@{/}">← Back</a>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <div class="text-muted small">Student name</div>
+                        <div class="fs-5 fw-semibold" th:text="${student.getName()}"></div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="text-muted small">Mark</div>
+                        <div class="fw-semibold"
+                             th:text="${student.getMark()}">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="text-muted small">Student surname</div>
+                        <div class="border rounded-3 p-3 bg-white" th:text="${student.getSurname()}"></div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="text-muted small">Student Exam</div>
+                        <div class="border rounded-3 p-3 bg-white" th:text="${student.getExam()}"></div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#editTaskModal">
+                        Edit / Save
+                    </button>
+
+                    <form th:action="@{/delete/{id}(id=${student.getId()})}"
+                          method="post"
+                          onsubmit="return confirm('Вы уверены, что хотите удалить эту задачу?');">
+                        <button type="submit" class="btn btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- EDIT MODAL -->
+        <div class="modal fade" id="editTaskModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content border-0 shadow">
+
+                    <div class="modal-header bg-info text-white">
+                        <h5 class="modal-title">Edit Task</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+
+                    <form th:action="@{/details/{id}(id=${student.id})}" method="post">
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label class="form-label">Student Name</label>
+                                <input type="text" class="form-control" name="name"
+                                       th:value="${student.getName()}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Student Surname</label>
+                                <input type="text" class="form-control" name="surname"
+                                       th:value="${student.getName()}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Exam</label>
+                                <input type="text" class="form-control" name="exam"
+                                       th:value="${student.getExam()}" required>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                Save changes
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container mt-4" th:if="${student == null}">
+        <div class="alert alert-warning">Student not found</div>
+        <a class="btn btn-secondary" th:href="@{/}">Back</a>
+    </div>
+
+</div>
+</html>
